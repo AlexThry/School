@@ -1,0 +1,257 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> GET URL
+Rule 2     expression -> GET URL instruction
+Rule 3     instruction -> contrainte UNION contrainte
+Rule 4     instruction -> instruction INTERSECT contrainte
+Rule 5     instruction -> instruction DIFF contrainte
+Rule 6     instruction -> instruction OR contrainte
+Rule 7     instruction -> instruction AND contrainte
+Rule 8     instruction -> contrainte
+Rule 9     contrainte -> CONTAINS NAME
+Rule 10    contrainte -> EXCLUDE NAME
+
+Terminals, with rules where they appear
+
+AND                  : 7
+CONTAINS             : 9
+DIFF                 : 5
+EXCLUDE              : 10
+GET                  : 1 2
+INTERSECT            : 4
+NAME                 : 9 10
+OR                   : 6
+UNION                : 3
+URL                  : 1 2
+error                : 
+
+Nonterminals, with rules where they appear
+
+contrainte           : 3 3 4 5 6 7 8
+expression           : 0
+instruction          : 2 4 5 6 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . GET URL
+    (2) expression -> . GET URL instruction
+
+    GET             shift and go to state 2
+
+    expression                     shift and go to state 1
+
+state 1
+
+    (0) S' -> expression .
+
+
+
+state 2
+
+    (1) expression -> GET . URL
+    (2) expression -> GET . URL instruction
+
+    URL             shift and go to state 3
+
+
+state 3
+
+    (1) expression -> GET URL .
+    (2) expression -> GET URL . instruction
+    (3) instruction -> . contrainte UNION contrainte
+    (4) instruction -> . instruction INTERSECT contrainte
+    (5) instruction -> . instruction DIFF contrainte
+    (6) instruction -> . instruction OR contrainte
+    (7) instruction -> . instruction AND contrainte
+    (8) instruction -> . contrainte
+    (9) contrainte -> . CONTAINS NAME
+    (10) contrainte -> . EXCLUDE NAME
+
+    $end            reduce using rule 1 (expression -> GET URL .)
+    CONTAINS        shift and go to state 6
+    EXCLUDE         shift and go to state 7
+
+    instruction                    shift and go to state 4
+    contrainte                     shift and go to state 5
+
+state 4
+
+    (2) expression -> GET URL instruction .
+    (4) instruction -> instruction . INTERSECT contrainte
+    (5) instruction -> instruction . DIFF contrainte
+    (6) instruction -> instruction . OR contrainte
+    (7) instruction -> instruction . AND contrainte
+
+    $end            reduce using rule 2 (expression -> GET URL instruction .)
+    INTERSECT       shift and go to state 8
+    DIFF            shift and go to state 9
+    OR              shift and go to state 10
+    AND             shift and go to state 11
+
+
+state 5
+
+    (3) instruction -> contrainte . UNION contrainte
+    (8) instruction -> contrainte .
+
+    UNION           shift and go to state 12
+    INTERSECT       reduce using rule 8 (instruction -> contrainte .)
+    DIFF            reduce using rule 8 (instruction -> contrainte .)
+    OR              reduce using rule 8 (instruction -> contrainte .)
+    AND             reduce using rule 8 (instruction -> contrainte .)
+    $end            reduce using rule 8 (instruction -> contrainte .)
+
+
+state 6
+
+    (9) contrainte -> CONTAINS . NAME
+
+    NAME            shift and go to state 13
+
+
+state 7
+
+    (10) contrainte -> EXCLUDE . NAME
+
+    NAME            shift and go to state 14
+
+
+state 8
+
+    (4) instruction -> instruction INTERSECT . contrainte
+    (9) contrainte -> . CONTAINS NAME
+    (10) contrainte -> . EXCLUDE NAME
+
+    CONTAINS        shift and go to state 6
+    EXCLUDE         shift and go to state 7
+
+    contrainte                     shift and go to state 15
+
+state 9
+
+    (5) instruction -> instruction DIFF . contrainte
+    (9) contrainte -> . CONTAINS NAME
+    (10) contrainte -> . EXCLUDE NAME
+
+    CONTAINS        shift and go to state 6
+    EXCLUDE         shift and go to state 7
+
+    contrainte                     shift and go to state 16
+
+state 10
+
+    (6) instruction -> instruction OR . contrainte
+    (9) contrainte -> . CONTAINS NAME
+    (10) contrainte -> . EXCLUDE NAME
+
+    CONTAINS        shift and go to state 6
+    EXCLUDE         shift and go to state 7
+
+    contrainte                     shift and go to state 17
+
+state 11
+
+    (7) instruction -> instruction AND . contrainte
+    (9) contrainte -> . CONTAINS NAME
+    (10) contrainte -> . EXCLUDE NAME
+
+    CONTAINS        shift and go to state 6
+    EXCLUDE         shift and go to state 7
+
+    contrainte                     shift and go to state 18
+
+state 12
+
+    (3) instruction -> contrainte UNION . contrainte
+    (9) contrainte -> . CONTAINS NAME
+    (10) contrainte -> . EXCLUDE NAME
+
+    CONTAINS        shift and go to state 6
+    EXCLUDE         shift and go to state 7
+
+    contrainte                     shift and go to state 19
+
+state 13
+
+    (9) contrainte -> CONTAINS NAME .
+
+    UNION           reduce using rule 9 (contrainte -> CONTAINS NAME .)
+    INTERSECT       reduce using rule 9 (contrainte -> CONTAINS NAME .)
+    DIFF            reduce using rule 9 (contrainte -> CONTAINS NAME .)
+    OR              reduce using rule 9 (contrainte -> CONTAINS NAME .)
+    AND             reduce using rule 9 (contrainte -> CONTAINS NAME .)
+    $end            reduce using rule 9 (contrainte -> CONTAINS NAME .)
+
+
+state 14
+
+    (10) contrainte -> EXCLUDE NAME .
+
+    UNION           reduce using rule 10 (contrainte -> EXCLUDE NAME .)
+    INTERSECT       reduce using rule 10 (contrainte -> EXCLUDE NAME .)
+    DIFF            reduce using rule 10 (contrainte -> EXCLUDE NAME .)
+    OR              reduce using rule 10 (contrainte -> EXCLUDE NAME .)
+    AND             reduce using rule 10 (contrainte -> EXCLUDE NAME .)
+    $end            reduce using rule 10 (contrainte -> EXCLUDE NAME .)
+
+
+state 15
+
+    (4) instruction -> instruction INTERSECT contrainte .
+
+    INTERSECT       reduce using rule 4 (instruction -> instruction INTERSECT contrainte .)
+    DIFF            reduce using rule 4 (instruction -> instruction INTERSECT contrainte .)
+    OR              reduce using rule 4 (instruction -> instruction INTERSECT contrainte .)
+    AND             reduce using rule 4 (instruction -> instruction INTERSECT contrainte .)
+    $end            reduce using rule 4 (instruction -> instruction INTERSECT contrainte .)
+
+
+state 16
+
+    (5) instruction -> instruction DIFF contrainte .
+
+    INTERSECT       reduce using rule 5 (instruction -> instruction DIFF contrainte .)
+    DIFF            reduce using rule 5 (instruction -> instruction DIFF contrainte .)
+    OR              reduce using rule 5 (instruction -> instruction DIFF contrainte .)
+    AND             reduce using rule 5 (instruction -> instruction DIFF contrainte .)
+    $end            reduce using rule 5 (instruction -> instruction DIFF contrainte .)
+
+
+state 17
+
+    (6) instruction -> instruction OR contrainte .
+
+    INTERSECT       reduce using rule 6 (instruction -> instruction OR contrainte .)
+    DIFF            reduce using rule 6 (instruction -> instruction OR contrainte .)
+    OR              reduce using rule 6 (instruction -> instruction OR contrainte .)
+    AND             reduce using rule 6 (instruction -> instruction OR contrainte .)
+    $end            reduce using rule 6 (instruction -> instruction OR contrainte .)
+
+
+state 18
+
+    (7) instruction -> instruction AND contrainte .
+
+    INTERSECT       reduce using rule 7 (instruction -> instruction AND contrainte .)
+    DIFF            reduce using rule 7 (instruction -> instruction AND contrainte .)
+    OR              reduce using rule 7 (instruction -> instruction AND contrainte .)
+    AND             reduce using rule 7 (instruction -> instruction AND contrainte .)
+    $end            reduce using rule 7 (instruction -> instruction AND contrainte .)
+
+
+state 19
+
+    (3) instruction -> contrainte UNION contrainte .
+
+    INTERSECT       reduce using rule 3 (instruction -> contrainte UNION contrainte .)
+    DIFF            reduce using rule 3 (instruction -> contrainte UNION contrainte .)
+    OR              reduce using rule 3 (instruction -> contrainte UNION contrainte .)
+    AND             reduce using rule 3 (instruction -> contrainte UNION contrainte .)
+    $end            reduce using rule 3 (instruction -> contrainte UNION contrainte .)
+
