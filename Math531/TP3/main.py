@@ -107,15 +107,17 @@ if __name__ == "__main__":
     print(f"au plus tard etape 4 : {step4b.get_au_plus_tard()}")
 
     path = os.getcwd()
+    path2 = os.path.join(path, "assets", "Pert2.jpg")
+    path3 = os.path.join(path, "assets", "Pert2-2.jpg")
     try:
         plt.figure()
         plt.subplot(1, 2, 1)
         plt.title("Diagramme Pert pour la question 4.1")
-        image = img.imread(path + "/assets/Pert2.jpg")
+        image = img.imread(path2)
         plt.imshow(image)
         plt.subplot(1, 2, 2)
         plt.title("Diagramme rempli")
-        image2 = img.imread(path + "/assets/Pert2-2.jpg")
+        image2 = img.imread(path3)
         plt.imshow(image2)
         plt.show()
     except FileNotFoundError:
